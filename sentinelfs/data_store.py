@@ -1,10 +1,7 @@
 import sqlite3
 import pandas as pd
-import streamlit as st
 from sentinelfs.config import DATA_DIR, DB_PATH
 from sentinelfs.utils import load_json
-
-GEOJSON_VERSION = "v3"
 
 
 def load_signals() -> pd.DataFrame:
@@ -15,13 +12,8 @@ def load_exposure() -> pd.DataFrame:
     return pd.read_csv(DATA_DIR / "demo_exposure.csv")
 
 
-@st.cache_data(show_spinner=False)
-def _load_geojson_cached(version: str) -> dict:
-    return load_json(DATA_DIR / "world_countries_admin0_simplified.geojson")
-
-
-def load_geojson(version: str = GEOJSON_VERSION) -> dict:
-    return _load_geojson_cached(version)
+def load_geojson() -> dict:
+    return load_json(DATA_DIR / "world_countries.geojson")
 
 
 def load_scenarios() -> dict:

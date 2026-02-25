@@ -6,17 +6,13 @@ from sentinelfs.maps import render_baseline_risk_map_folium
 st.set_page_config(page_title="Map Home", layout="wide")
 st.title("🗺️ SentinelFS Atlas — Map Home")
 
-c1, c2, c3, c4 = st.columns([1, 1, 1, 1])
+c1, c2, c3 = st.columns([1, 1, 1])
 with c1:
     window = st.radio("Date window", [30, 90], horizontal=True, index=1)
 with c2:
     commodity = st.selectbox("Commodity", ["All", "Wheat", "Rice", "Frozen Protein"], index=0)
 with c3:
     mode = st.toggle("Advanced Mode", value=False)
-with c4:
-    if st.button("Reset map cache"):
-        st.cache_data.clear()
-        st.rerun()
 
 signals = load_signals()
 geojson = load_geojson()
@@ -24,12 +20,9 @@ latest_risk = compute_baseline_risk(signals, window_days=window)
 
 left, right = st.columns([3, 1])
 with left:
-    clicked = render_baseline_risk_map_folium(geojson, latest_risk)
-    if clicked and clicked.get("country_name"):
-        st.session_state["selected_country"] = clicked["country_name"]
-        if clicked.get("iso_a3"):
-            st.session_state["selected_country_iso3"] = clicked["iso_a3"]
-        st.success(f"Selected: {clicked['country_name']}")
+    clicked_country = render_baseline_risk_map_folium(geojson, latest_risk)
+    if clicked_country:
+        st.session_state["selected_country"] = clicked_country
         st.switch_page("pages/2_Country_Focus.py")
 
 with right:
