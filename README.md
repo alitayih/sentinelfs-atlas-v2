@@ -51,7 +51,6 @@ streamlit run app.py
 2. In Streamlit Cloud, create app from this repo.
 3. Set entrypoint to `app.py`.
 4. Deploy, then use **Clear cache** and **Reboot app** if needed.
-5. This repo pins Streamlit Cloud Python runtime via `runtime.txt` (`python-3.12`).
 
 ## Notes
 - Demo data is synthetic.
