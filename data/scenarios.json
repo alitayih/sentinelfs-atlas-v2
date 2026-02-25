@@ -1,0 +1,18 @@
+{
+  "Hormuz Closure": {
+    "base_impact": 0.85,
+    "description": "Transit interruption through the Strait of Hormuz disrupts energy and shipping flows."
+  },
+  "Red Sea Disruption": {
+    "base_impact": 0.72,
+    "description": "Security incidents around the Red Sea extend lead times and reroute cargo."
+  },
+  "Export Ban \u2013 Wheat": {
+    "base_impact": 0.65,
+    "description": "Major producer imposes wheat export controls, tightening global supply."
+  },
+  "Regional Escalation": {
+    "base_impact": 0.78,
+    "description": "Conflict spillover drives broader trade and logistics volatility across regions."
+  }
+}
