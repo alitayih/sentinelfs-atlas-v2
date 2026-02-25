@@ -1,0 +1,1 @@
+"""SentinelFS Atlas package."""
