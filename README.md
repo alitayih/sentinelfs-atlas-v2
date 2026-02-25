@@ -29,7 +29,7 @@ SentinelFS Atlas is a **map-first** Streamlit app for anticipatory food/logistic
 │  ├─ ui.py
 │  ├─ utils.py
 ├─ data/
-│  ├─ ne_110m_admin_0_countries.geojson
+│  ├─ world_countries.geojson
 │  ├─ demo_signals.csv
 │  ├─ demo_exposure.csv
 │  ├─ scenarios.json
@@ -51,7 +51,6 @@ streamlit run app.py
 2. In Streamlit Cloud, create app from this repo.
 3. Set entrypoint to `app.py`.
 4. Deploy, then use **Clear cache** and **Reboot app** if needed.
-5. Ensure Streamlit Cloud Python version is set to **3.12** (or keep `runtime.txt` at `python-3.12`).
 
 ## Notes
 - Demo data is synthetic.
