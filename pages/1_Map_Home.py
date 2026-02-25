@@ -20,17 +20,10 @@ latest_risk = compute_baseline_risk(signals, window_days=window)
 
 left, right = st.columns([3, 1])
 with left:
-    clicked = render_baseline_risk_map_folium(geojson, latest_risk)
-    if clicked and clicked.get("country_name"):
-        st.session_state["selected_country"] = clicked["country_name"]
-        if clicked.get("iso_a3"):
-            st.session_state["selected_country_iso3"] = clicked["iso_a3"]
-        try:
-            st.switch_page("pages/2_Country_Focus.py")
-        except Exception:
-            st.success(f"Selected {clicked['country_name']}.")
-            if st.button("Open Country Focus", type="primary"):
-                st.switch_page("pages/2_Country_Focus.py")
+    clicked_country = render_baseline_risk_map_folium(geojson, latest_risk)
+    if clicked_country:
+        st.session_state["selected_country"] = clicked_country
+        st.switch_page("pages/2_Country_Focus.py")
 
 with right:
     st.subheader("Quick Summary")

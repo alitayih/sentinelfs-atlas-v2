@@ -1,11 +1,7 @@
 import streamlit as st
-
 from sentinelfs.data_store import init_actions_table
 
 st.set_page_config(page_title="SentinelFS Atlas", layout="wide")
-print("BOOT_OK")
-st.write("BOOT_OK")
-
 init_actions_table()
 
 st.title("SentinelFS Atlas")
