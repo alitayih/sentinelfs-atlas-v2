@@ -1,4 +1,7 @@
+import folium
 import pandas as pd
+import streamlit as st
+from streamlit_folium import st_folium
 
 COLOR_MAP = {"Green": "#2ca25f", "Yellow": "#fec44f", "Red": "#de2d26"}
 
@@ -30,15 +33,7 @@ def _extract_clicked_country(map_data):
 
 
 def render_baseline_risk_map_folium(geojson: dict, latest_risk_df: pd.DataFrame):
-    import folium
-    from streamlit_folium import st_folium
-
-    gj = _join_geojson(
-        geojson,
-        latest_risk_df.rename(columns={"risk_score": "score", "risk_level": "level"}),
-        "score",
-        "level",
-    )
+    gj = _join_geojson(geojson, latest_risk_df.rename(columns={"risk_score": "score", "risk_level": "level"}), "score", "level")
     m = folium.Map(location=[18, 10], zoom_start=2, tiles="cartodbpositron")
     folium.GeoJson(
         gj,
@@ -55,15 +50,7 @@ def render_baseline_risk_map_folium(geojson: dict, latest_risk_df: pd.DataFrame)
 
 
 def render_impact_map_folium(geojson: dict, impact_df: pd.DataFrame, show_hormuz: bool = False):
-    import folium
-    from streamlit_folium import st_folium
-
-    gj = _join_geojson(
-        geojson,
-        impact_df.rename(columns={"impact_severity": "score", "impact_level": "level"}),
-        "score",
-        "level",
-    )
+    gj = _join_geojson(geojson, impact_df.rename(columns={"impact_severity": "score", "impact_level": "level"}), "score", "level")
     m = folium.Map(location=[18, 10], zoom_start=2, tiles="cartodbpositron")
     folium.GeoJson(
         gj,
@@ -76,10 +63,6 @@ def render_impact_map_folium(geojson: dict, impact_df: pd.DataFrame, show_hormuz
         tooltip=folium.GeoJsonTooltip(fields=["country_name", "level", "score"], aliases=["Country", "Impact", "Severity"]),
     ).add_to(m)
     if show_hormuz:
-        folium.Marker(
-            location=[26.5, 56.3],
-            tooltip="Hormuz chokepoint",
-            icon=folium.Icon(color="red", icon="info-sign"),
-        ).add_to(m)
+        folium.Marker(location=[26.5, 56.3], tooltip="Hormuz chokepoint", icon=folium.Icon(color="red", icon="info-sign")).add_to(m)
     map_data = st_folium(m, width=None, height=540, key="impact_map")
     return _extract_clicked_country(map_data)
