@@ -1,13 +1,4 @@
 import streamlit as st
-
-try:
-    import folium
-    from streamlit_folium import st_folium
-except Exception as e:
-    st.error("Dependency import failed. Check requirements.txt and Streamlit Cloud logs.")
-    st.exception(e)
-    st.stop()
-
 from sentinelfs.data_store import init_actions_table
 
 st.set_page_config(page_title="SentinelFS Atlas", layout="wide")
